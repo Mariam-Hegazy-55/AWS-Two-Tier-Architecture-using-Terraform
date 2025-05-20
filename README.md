@@ -5,16 +5,9 @@ This AWS architecture deploys a highly available web app using Terraform. An ALB
 The project is organized as follows:
 
 FINAL .../  
-├── .terraform/  
-│   ├── modules/  
-│   ├── providers/  
+├── .terraform/    
 
 ├── terraform.tfstate  
-
-├── documentation/  
-
-├── key file/  
-│   └── my-key.pem  
 
 ├── modules/  
 │   ├── ec2/  
