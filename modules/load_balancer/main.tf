@@ -1,74 +1,68 @@
+# ================================================
 # Create the Application Load Balancer (ALB)
+# ================================================
 resource "aws_lb" "app-lb" {
-    name = "app-LB"
-    internal = false # Accessible from internet
-    load_balancer_type = "application"
-    security_groups = [ aws_security_group.alb_sg.id ]
-    subnets = var.subnets
-    ip_address_type = "ipv4"
-    tags = {
-      name = "Project ALB"
-    }
+  name               = "app-LB"
+  internal           = false                         # ALB is internet-facing
+  load_balancer_type = "application"                 # Type: Application Load Balancer
+  security_groups    = [var.alb_sg_id]               # Security group to allow traffic
+  subnets            = var.subnets                   # Subnets (must be public)
+  enable_deletion_protection = false                 # Optional: Set to true in production
+  ip_address_type    = "ipv4"                        # Use IPv4 addressing
+
+  tags = {
+    name = "Project ALB"
+    Name = "Project ALB"
+  }
 }
 
-#Create the Target Group
+# =====================================================
+# Create the Target Group for EC2 instances (port 80)
+# =====================================================
 resource "aws_lb_target_group" "lb-target-group" {
-    name = "lb-target-group"
-    port = 80
-    protocol = "HTTP"
-    vpc_id = var.vpc_id
+  name     = "lb-target-group"
+  port     = 80                                     # Port on the target (EC2)
+  protocol = "HTTP"                                 # Protocol used to communicate with targets
+  vpc_id   = var.vpc_id                             # VPC where the targets live
 
-    health_check {
-    interval            = 30
-    path                = "/"
-    protocol            = "HTTP"
-    timeout             = 5
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    }
-    tags = {
-      name="Project alb_target_group"
-    }
-  
+  # Health check configuration
+  health_check {
+    interval            = 30                        # Check every 30 seconds
+    path                = "/"                       # Check this path
+    protocol            = "HTTP"                    # Use HTTP protocol for health checks
+    timeout             = 5                         # Fail if response takes >5 seconds
+    healthy_threshold   = 2                         # Consider healthy after 2 successful checks
+    unhealthy_threshold = 2                         # Consider unhealthy after 2 failed checks
+  }
+
+  tags = {
+    name = "Project alb_target_group"
+    Name = "Project alb_target_group"
+  }
 }
 
+# =========================================================
+# Create a Listener on the ALB to forward HTTP traffic
+# =========================================================
 resource "aws_lb_listener" "alb-listeners" {
-    load_balancer_arn = aws_lb.app-lb.arn
-    port = "80"
-    protocol = "HTTP"
+  load_balancer_arn = aws_lb.app-lb.arn             # Link to the ALB
+  port              = "80"                          # Listen on port 80 (HTTP)
+  protocol          = "HTTP"                        # Protocol for incoming traffic
 
-    default_action {
-      type = "forward"
-      target_group_arn = aws_lb_target_group.lb-target-group.arn
-    }
-}
-
-#attach listeners to target group
-resource "aws_lb_target_group_attachment" "td_attachment" {
-    count = length(var.instances)
+  # Forward the traffic to the target group
+  default_action {
+    type             = "forward"
     target_group_arn = aws_lb_target_group.lb-target-group.arn
-    target_id = var.instances[count.index]
-    port = 80
-    depends_on = [ aws_lb_target_group.lb-target-group ]
-
+  }
 }
 
-
-#create alb security group
-resource "aws_security_group" "alb_sg" {
-  name        = "alb-sg"
-  vpc_id      = var.vpc_id
-
-  ingress {
-    from_port   = "0"
-    to_port     = "0"
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  egress {
-    from_port   = "0"
-    to_port     = "0"
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+# ========================================================
+# Attach EC2 instances (listeners) to the Target Group
+# ========================================================
+resource "aws_lb_target_group_attachment" "td_attachment" {
+  count              = length(var.instances)                         # One attachment per instance
+  target_group_arn   = aws_lb_target_group.lb-target-group.arn      # Attach to this target group
+  target_id          = var.instances[count.index]                   # ID of the EC2 instance
+  port               = 80                                           # Port the EC2 listens on
+  depends_on         = [aws_lb_target_group.lb-target-group]        # Ensure target group is ready first
 }
