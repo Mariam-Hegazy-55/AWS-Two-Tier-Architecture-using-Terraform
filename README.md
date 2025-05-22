@@ -40,3 +40,32 @@ FINAL .../
 ├── terraform.tfvars  
 
 └── variables.tf  
+
+# 🧩 Architecture Components
+Custom VPC: A virtual private cloud with defined CIDR blocks to host the infrastructure.
+
+Subnets:
+Public Subnets: Two subnets for the web server tier, each in a different Availability Zone (AZ) to ensure high availability.
+Private Subnets: Two subnets for the RDS tier, also distributed across different AZs.
+
+Route Tables:
+Public Route Table: Associated with public subnets and connected to an Internet Gateway for external access.
+Private Route Table: Associated with private subnets and connected to a NAT Gateway for secure outbound internet access.
+
+Internet Gateway & NAT Gateway:
+Internet Gateway: Allows internet access for resources in public subnets.
+
+EC2 Instances:
+Deployed in public subnets with Apache web servers installed via user data scripts.
+
+RDS MySQL Instance:
+Hosted in private subnets to store application data securely.
+
+Security Groups:
+Configured to allow HTTP traffic to web servers and MySQL traffic between web servers and the database.
+
+
+Terraform Modules:
+Used to organize and reuse code efficiently, promoting scalability and maintainability.
+
+
