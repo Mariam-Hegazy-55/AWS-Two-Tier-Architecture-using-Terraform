@@ -1,9 +1,9 @@
 # Create the main VPC
 resource "aws_vpc" "project_vpc" {
-    cidr_block           = var.cidr                      # CIDR block for the VPC (e.g., 10.0.0.0/16)
-    enable_dns_support   = true                           # Enable DNS resolution in the VPC
-    enable_dns_hostnames = true                           # Enable DNS hostnames for instances
-    tags = {
+    cidr_block           = var.cidr                      
+    enable_dns_support   = true                          
+    enable_dns_hostnames = true                          
+tags = {
       name = "project VPC"
       Name = "project VPC"
     }
@@ -12,8 +12,8 @@ resource "aws_vpc" "project_vpc" {
 # Create Public Subnet 1 in the first availability zone
 resource "aws_subnet" "public1" {
     vpc_id            = aws_vpc.project_vpc.id
-    cidr_block        = var.sub_pub[0]                   # CIDR block for public subnet 1
-    availability_zone = var.azs[0]                        # First AZ (e.g., us-east-1a)
+    cidr_block        = var.sub_pub[0]                   
+    availability_zone = var.azs[0]                       
     tags = {
       name = "Public 1"
       Name = "Public 1"
@@ -23,8 +23,8 @@ resource "aws_subnet" "public1" {
 # Create Public Subnet 2 in the second availability zone
 resource "aws_subnet" "public2" {
     vpc_id            = aws_vpc.project_vpc.id
-    cidr_block        = var.sub_pub[1]                   # CIDR block for public subnet 2
-    availability_zone = var.azs[1]                        # Second AZ (e.g., us-east-1b)
+    cidr_block        = var.sub_pub[1]                   
+    availability_zone = var.azs[1]                       
     tags = {
       name = "Public 2"
       Name = "Public 2"
