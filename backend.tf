@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket = "mariam-two-tier-app-project"
+    bucket = "mariam-backend"
     key    = "two-tier-app/terraform.tfstate"
     region = "eu-west-2"
-    
+
   }
 }
