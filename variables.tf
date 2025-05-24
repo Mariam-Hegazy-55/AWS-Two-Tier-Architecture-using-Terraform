@@ -33,7 +33,7 @@ variable "db_name" {
   default     = "mydatabase"
 }
 
-# VPC CIDR block (default is a private class A range)
+# VPC CIDR block 
 variable "cidr" {
   description = "The CIDR block for the VPC"
   type        = string
