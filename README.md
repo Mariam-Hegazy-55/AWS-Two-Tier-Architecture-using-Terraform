@@ -8,42 +8,38 @@ This AWS architecture deploys a highly available web app using Terraform. An ALB
 # 🛠️ Project Structure
 The project is organized as follows:
 
-FINAL .../  
-├── .terraform/    
-
-├── terraform.tfstate  
-
-├── modules/  
-│   ├── ec2/  
-│   │   ├── main.tf  
-│   │   ├── output.tf  
-│   │   └── variables.tf  
-│   ├── load_balancer/  
-│   │   ├── main.tf  
-│   │   ├── output.tf  
-│   │   └── variables.tf  
-│   ├── rds/  
-│   │   ├── main.tf  
-│   │   ├── output.tf  
-│   │   └── variables.tf  
-│   └── vpc/  
-│       ├── main.tf  
-│       ├── output.tf  
-│       └── variables.tf  
-
-├── .terraform.lock.hcl  
-
-├── backend.tf  
-
-├── main.tf  
-
-├── output.tf  
-
-├── provider.tf  
-
-├── terraform.tfvars  
-
-└── variables.tf  
+CLOUD-INFRA/
+├── .terraform/                   # Terraform cache directory
+│   └── plugins/                  # Provider plugins
+├── modules/
+│   ├── ec2/                      # Compute module
+│   │   ├── templates/
+│   │   │   └── user_data.sh.tpl  # Cloud-init template
+│   │   ├── main.tf               # EC2 instances
+│   │   ├── outputs.tf            # Instance outputs
+│   │   └── variables.tf          # Size/AMI vars
+│   │
+│   ├── vpc/                      # Network module
+│   │   ├── main.tf               # VPC/Subnets
+│   │   ├── outputs.tf            # Network IDs
+│   │   └── variables.tf          # CIDR vars
+│   │
+│   ├── rds/                      # Database module
+│   │   ├── main.tf               # Aurora/MySQL
+│   │   ├── outputs.tf            # Endpoints
+│   │   └── variables.tf          # DB configs
+│   │
+│   └── lb/                       # Load Balancer
+│       ├── main.tf               # ALB/NLB
+│       ├── outputs.tf            # DNS names
+│       └── variables.tf          # LB specs
+│
+├── main.tf                       # Core resources
+├── providers.tf                  # AWS/Cloud config
+├── variables.tf                  # Global variables
+├── outputs.tf                    # Stack outputs
+├── terraform.tfvars              # Env variables
+└── backend.tf                    # S3 state config 
 
 # 🧩 Architecture Components
 Custom VPC: A virtual private cloud with defined CIDR blocks to host the infrastructure.
