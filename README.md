@@ -7,7 +7,7 @@ This AWS architecture deploys a highly available web app using Terraform. An ALB
 
 # 🛠️ Project Structure
 The project is organized as follows:
-
+``` mermaid
 CLOUD-INFRA/
 ├── .terraform/                   # Terraform cache directory
 │   └── plugins/                  # Provider plugins
@@ -40,7 +40,7 @@ CLOUD-INFRA/
 ├── outputs.tf                    # Stack outputs
 ├── terraform.tfvars              # Env variables
 └── backend.tf                    # S3 state config 
-
+```
 # 🧩 Architecture Components
 Custom VPC: A virtual private cloud with defined CIDR blocks to host the infrastructure.
 
