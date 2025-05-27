@@ -2,30 +2,7 @@
 This AWS architecture deploys a highly available web app using Terraform. An ALB routes traffic to EC2 instances in public subnets across two AZs, which access private RDS databases. An S3 bucket offers object storage and stores the Terraform state securely within the same VPC.
 
 ![two tier project](https://github.com/user-attachments/assets/01a035f7-d3f8-4780-870c-50b21085fb9a)
-```mermaid
-graph TD
-    A[☁️ AWS Cloud] --> B[📶 4G+Web1.2]
-    B --> C[🖥️ VPC]
-    B --> D[✔️ 🚀 4G+web1.2.x]
-    B --> E[❌ 🌐 Public Launch Webdriver]
-    B --> F[❌ 🔒 Private Submit]
-    B --> G[❌ 📨 RCS]
-    B --> H[❌ 🪣 S3 Bucket]
-    B --> I[❌ 🔄 Iteration Extail]
-    B --> J[❌ 🐍 IPython]
-    B --> K[❌ 🔌 API]
-    B --> L[❌ 🖥️ Web Server]
-    
-    A --> P[📤 Submit]
-    P --> Q[50% 📊]
-    P --> R[🛠️ A/S]
-    P --> S[0% ⚠️]
-    P --> T[🌍 Public Launch]
-    P --> U[🕸️ Webdriver]
 
-    style D fill:#9f9,stroke:#090
-    style C,E,F,G,H,I,J,K,L fill:#f99,stroke:#900
-```
 # 🛠️ Project Structure
 The project is organized as follows:
 ``` bash
