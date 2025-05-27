@@ -7,7 +7,7 @@ This AWS architecture deploys a highly available web app using Terraform. An ALB
 
 # 🛠️ Project Structure
 The project is organized as follows:
-``` mermaid
+``` bash
 CLOUD-INFRA/
 ├── .terraform/                   # Terraform cache directory
 │   └── plugins/                  # Provider plugins
