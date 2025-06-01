@@ -6,13 +6,12 @@ This AWS architecture deploys a highly available web app using Terraform. An ALB
 ---
 ## 📚 Table of Contents
 
-1. [📖 Project Title](#aws-two-tier-architecture-with-terraform)
-2. [📌 Architecture Overview](#-architecture-overview)
-3. [🚀 Features](#-features)
-4. [🛠️ Tools & Technologies](#️-tools--technologies)
-5. [📂 Folder Structure](#-folder-structure)
-6. [⚙️ How to Deploy](#️-how-to-deploy)
-7. [🌐 Accessing the Application](#-accessing-the-application)
+1. [📌 Architecture Overview](#-architecture-overview)
+2. [🚀 Features](#-features)
+3. [🛠️ Tools & Technologies](#️-tools--technologies)
+4. [📂 Folder Structure](#-folder-structure)
+5. [⚙️ How to Deploy](#️-how-to-deploy)
+6. [🌐 Accessing the Application](#-accessing-the-application)
 
 
 ---
@@ -88,3 +87,24 @@ CLOUD-INFRA/
 ├── terraform.tfvars              # Env variables
 └── backend.tf                    # S3 state config 
 ```
+
+---
+
+## 📦 How to Deploy
+
+1. **Initialize Terraform**
+   ```bash
+   terraform init
+   ```
+2. **Validate Configuration**
+   ```bash
+   terraform validate
+   ```
+3. **Preview the Plan**
+   ```bash
+   terraform plan
+   ```
+4. **Apply the Plan**
+    ```bash
+   terraform apply
+   ```
