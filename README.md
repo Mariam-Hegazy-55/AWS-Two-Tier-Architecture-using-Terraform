@@ -9,9 +9,10 @@ This AWS architecture deploys a highly available web app using Terraform. An ALB
 1. [📌 Architecture Overview](#-architecture-overview)
 2. [🚀 Features](#-features)
 3. [🛠️ Tools & Technologies](#️-tools--technologies)
-4. [📂 Folder Structure](#-folder-structure)
-5. [📦 How to Deploy](#️-how-to-deploy)
-6. [🌐 Accessing the Application](#-accessing-the-application)
+4. [📦 Terraform Modules](#-terraform-modules)
+5. [📂 Folder Structure](#-folder-structure)
+6. [⚙️ How to Deploy](#️-how-to-deploy)
+7. [🌐 Accessing the Application](#-accessing-the-application)
 
 
 ---
@@ -48,6 +49,21 @@ This AWS architecture deploys a highly available web app using Terraform. An ALB
 | AWS RDS     | Managed MySQL database         |
 | AWS S3      | Remote backend for tfstate     |
 | ALB         | Load balancing incoming traffic|
+
+---
+
+## 📦 Terraform Modules
+
+This project is structured using reusable Terraform modules:
+
+| Module  | Description |
+|---------|-------------|
+| `vpc`   | Creates the VPC, public and private subnets, internet gateway, and route tables. |
+| `ec2`   | Launches EC2 instances into public subnets with user data to install web servers. |
+| `rds`   | Provisions a MySQL RDS database in private subnets with Multi-AZ configuration. |
+| `lb`    | Creates an Application Load Balancer (ALB), listeners, target groups, and registers EC2 instances. |
+
+Each module is isolated and parameterized to ensure flexibility, scalability, and reuse in other projects.
 
 ---
 
