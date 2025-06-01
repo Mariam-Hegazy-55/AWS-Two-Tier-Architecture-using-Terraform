@@ -10,7 +10,7 @@ This AWS architecture deploys a highly available web app using Terraform. An ALB
 2. [🚀 Features](#-features)
 3. [🛠️ Tools & Technologies](#️-tools--technologies)
 4. [📂 Folder Structure](#-folder-structure)
-5. [⚙️ How to Deploy](#️-how-to-deploy)
+5. [📦 How to Deploy](#️-how-to-deploy)
 6. [🌐 Accessing the Application](#-accessing-the-application)
 
 
