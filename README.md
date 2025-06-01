@@ -96,15 +96,29 @@ CLOUD-INFRA/
    ```bash
    terraform init
    ```
-2. **Validate Configuration**
-   ```bash
-   terraform validate
-   ```
-3. **Preview the Plan**
+2. **Preview the Plan**
    ```bash
    terraform plan
    ```
-4. **Apply the Plan**
+3. **Apply the Plan**
     ```bash
    terraform apply
    ```
+---
+## 🌐 Accessing the Application
+
+After successful deployment:
+
+- 🌍 **Web Access:**  
+  Access the web application using the **DNS name of the Application Load Balancer (ALB)** provided in the Terraform output.
+
+- 🖥️ **Web Servers:**  
+  Ensure the EC2 instances are properly configured with a running web server such as **Apache**, **NGINX**, or **PHP-based applications** using `user_data` or Ansible/Docker.
+
+- 🔒 **Database Access:**  
+  The **RDS endpoint** is hosted in private subnets and is **only accessible from within the VPC**, typically by the EC2 web servers.
+
+Example:
+```bash
+curl http://<alb_dns_name>
+```
