@@ -3,6 +3,19 @@ This AWS architecture deploys a highly available web app using Terraform. An ALB
 
 ![two tier project](https://github.com/user-attachments/assets/01a035f7-d3f8-4780-870c-50b21085fb9a)
 
+---
+## 📚 Table of Contents
+
+1. [📖 Project Title](#aws-two-tier-architecture-with-terraform)
+2. [📌 Architecture Overview](#-architecture-overview)
+3. [🚀 Features](#-features)
+4. [🛠️ Tools & Technologies](#️-tools--technologies)
+5. [📂 Folder Structure](#-folder-structure)
+6. [⚙️ How to Deploy](#️-how-to-deploy)
+7. [🌐 Accessing the Application](#-accessing-the-application)
+
+
+---
 ## 📌 Architecture Overview
 
 - **Region:** `eu-west-2 (London)`
