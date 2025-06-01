@@ -112,11 +112,6 @@ After successful deployment:
 - 🌍 **Web Access:**  
   Access the web application using the **DNS name of the Application Load Balancer (ALB)** provided in the Terraform output.
 
-- 🖥️ **Web Servers:**  
-  Ensure the EC2 instances are properly configured with a running web server such as **Apache**, **NGINX**, or **PHP-based applications** using `user_data` or Ansible/Docker.
-
-- 🔒 **Database Access:**  
-  The **RDS endpoint** is hosted in private subnets and is **only accessible from within the VPC**, typically by the EC2 web servers.
 
 Example:
 ```bash
