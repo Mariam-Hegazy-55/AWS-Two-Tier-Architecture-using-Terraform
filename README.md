@@ -67,3 +67,75 @@ Terraform Modules:
 Used to organize and reuse code efficiently, promoting scalability and maintainability.
 
 
+## 📌 Architecture Overview
+
+- **Region:** `eu-west-2 (London)`
+- **VPC** with:
+  - **2 Public Subnets** (eu-west-2a, eu-west-2b) for EC2 web servers
+  - **2 Private Subnets** (eu-west-2a, eu-west-2b) for RDS
+- **Internet Gateway (IGW)** for public access
+- **Application Load Balancer (ALB)** for distributing incoming traffic
+- **EC2 Instances** running web servers (Apache/PHP or NGINX)
+- **Amazon RDS (MySQL)** in Multi-AZ mode
+- **S3 Bucket** for storing `terraform.tfstate` file
+
+---
+
+## 🚀 Features
+
+- ✅ High Availability across multiple Availability Zones
+- ✅ Infrastructure as Code using Terraform
+- ✅ Remote state management via S3
+- ✅ Scalable and modular design
+- ✅ Secure separation of public and private resources
+
+---
+
+## 🛠️ Tools & Technologies
+
+| Tool        | Purpose                        |
+|-------------|--------------------------------|
+| Terraform   | Infrastructure provisioning    |
+| AWS EC2     | Hosting web servers            |
+| AWS RDS     | Managed MySQL database         |
+| AWS S3      | Remote backend for tfstate     |
+| ALB         | Load balancing incoming traffic|
+
+---
+
+## 📂 Folder Structure
+The project is organized as follows:
+``` bash
+CLOUD-INFRA/
+├── .terraform/                   # Terraform cache directory
+│   └── plugins/                  # Provider plugins
+├── modules/
+│   ├── ec2/                      # Compute module
+│   │   ├── templates/
+│   │   │   └── user_data.sh.tpl  # Cloud-init template
+│   │   ├── main.tf               # EC2 instances
+│   │   ├── outputs.tf            # Instance outputs
+│   │   └── variables.tf          # Size/AMI vars
+│   │
+│   ├── vpc/                      # Network module
+│   │   ├── main.tf               # VPC/Subnets
+│   │   ├── outputs.tf            # Network IDs
+│   │   └── variables.tf          # CIDR vars
+│   │
+│   ├── rds/                      # Database module
+│   │   ├── main.tf               # Aurora/MySQL
+│   │   ├── outputs.tf            # Endpoints
+│   │   └── variables.tf          # DB configs
+│   │
+│   └── lb/                       # Load Balancer
+│       ├── main.tf               # ALB/NLB
+│       ├── outputs.tf            # DNS names
+│       └── variables.tf          # LB specs
+│
+├── main.tf                       # Core resources
+├── providers.tf                  # AWS/Cloud config
+├── variables.tf                  # Global variables
+├── outputs.tf                    # Stack outputs
+├── terraform.tfvars              # Env variables
+└── backend.tf                    # S3 state config 
+```
