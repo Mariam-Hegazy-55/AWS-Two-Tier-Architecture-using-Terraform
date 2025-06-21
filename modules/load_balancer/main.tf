@@ -57,7 +57,7 @@ resource "aws_lb_listener" "alb-listeners" {
 }
 
 # ========================================================
-# Attach EC2 instances (listeners) to the Target Group
+# Attach listeners to the Target Group
 # ========================================================
 resource "aws_lb_target_group_attachment" "td_attachment" {
   count              = length(var.instances)                         # One attachment per instance
